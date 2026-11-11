@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* Navbar */
+
+        nav {
+            width: 100%;
+            padding: 20px 8%;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .logout-btn {
+            padding: 11px 22px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* Main Section */
+
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .welcome {
+            background: linear-gradient(120deg, #2563eb, #7c3aed);
+            padding: 55px;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome h1 {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .welcome p {
+            font-size: 15px;
+            color: #e0e7ff;
+            line-height: 1.7;
+        }
+
+        .welcome span {
+            font-weight: 800;
+        }
+
+        /* Dashboard Cards */
+
+        .section-title {
+            margin: 45px 0 20px;
+            font-size: 21px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.04);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            border-radius: 12px;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome {
+                padding: 35px 25px;
+            }
+
+            .welcome h1 {
+                font-size: 26px;
+            }
+
+            nav {
+                padding: 18px 5%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+        <div class="logo">MyDashboard.</div>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout ↗</button>
+        </form>
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <div class="container">
+
+        <div class="welcome">
+            <h1>Hello, <span>{{ request.user.username }}</span> 👋</h1>
+
+            <p>
+                Welcome to your personal dashboard.
+                We're happy to have you here!
+                You have successfully logged into your account.
+            </p>
+        </div>
+
+
+        <h2 class="section-title">Your Dashboard</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">👤</div>
+                <h3>Your Profile</h3>
+                <p>Welcome back, {{ request.user.username }}. Manage your personal account.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔐</div>
+                <h3>Account Security</h3>
+                <p>Your account is protected by Django authentication.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h3>Getting Started</h3>
+                <p>Explore your dashboard and enjoy your experience with us.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer>
+        © 2026 MyDashboard. All rights reserved.
+    </footer>
+
+</body>
+</html>
